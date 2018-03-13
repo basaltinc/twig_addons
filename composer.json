@@ -50,5 +50,9 @@
       "build/profiles/contrib/{$name}": ["type:drupal-profile"],
       "build/themes/contrib/{$name}": ["type:drupal-theme"]
     }
+  },
+  "require": {
+    "basaltinc/twig-tools": "^1.3",
+    "webmozart/path-util": "^2.3"
   }
 }
