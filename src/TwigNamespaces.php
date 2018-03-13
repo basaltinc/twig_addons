@@ -27,7 +27,13 @@ class TwigNamespaces extends \Twig_Loader_Filesystem {
       $this->twigLoaderConfig = TwigTools\Namespaces::buildLoaderConfig($twigNamespaceConfig, $file['pathRoot']);
       foreach ($this->twigLoaderConfig as $key => $value) {
         foreach ($value['paths'] as $path) {
-          $this->addPath($path, $key);
+          if (file_exists($path)) {
+            $this->addPath($path, $key);
+          } else {
+            $message = 'Twig Namespace path does not exist: ' . $path;
+            \Drupal::logger('twig_addons')->warning($message);
+            drupal_set_message($message, 'error');
+          }
         }
       }
     } catch (Exception $exception) {
